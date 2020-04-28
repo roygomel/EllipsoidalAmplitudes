@@ -8,17 +8,17 @@ Download from GitHub "Aell_Harmonics" and save it in a local folder.
 
 Open Python:
 
-// First import sys:
-1. import sys
+First import sys:
+>> import sys
 
-// Second append the "Aell_Harmonics" path:
-2. sys.path.insert(0, '/the/local/folder/path/Aell_Harmonics/')
+Second append the "Aell_Harmonics" path:
+>> sys.path.insert(0, '/the/local/folder/path/Aell_Harmonics/')
 
-// Third import the package "Harmonics":
-3. import Harmonics as H
+Third import the package "Harmonics":
+>> import Harmonics as H
 
-// Forth use the "Aell_PH" function to derive the semi-amplitudes of the first three harmonics:
-4. H.Aell_PH(teff,logg,f,i,q,band)
+Forth use the "Aell_PH" function to derive the semi-amplitudes of the first three harmonics:
+>> H.Aell_PH(teff,logg,f,i,q,band)
 
 Function description:
 Aell_PH derives the ellipsoidal-semi-amplitudes of the first three harmonics.
