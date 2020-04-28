@@ -18,7 +18,7 @@ Open Python:
 >> import Harmonics as H
 
 4. Use the "Aell_PH" function to derive the semi-amplitudes of the first three harmonics:
->> H.Aell_PH(teff,logg,f,i,q,band)
+>> H.Aell_PH(teff,logg,f,i,q,band)  
   
   
 Function description:
