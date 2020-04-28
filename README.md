@@ -24,12 +24,12 @@ Function description:
 Aell_PH derives the ellipsoidal-semi-amplitudes of the first three harmonics.
 
 Inputs:
-teff - effective temperature of the primary star
-logg - surface gravity of the primary star
-f - Roche-lobe filling factor of the primary
-i - orbital inclination
-q - binary mass ratio
-band - observing band
+teff - effective temperature of the primary star, 
+logg - surface gravity of the primary star, 
+f - Roche-lobe filling factor of the primary, 
+i - orbital inclination, 
+q - binary mass ratio, 
+band - observing band.
 
 Outputs:
 coeffA - semi-amplitudes of the first three harmonics (a1c, a2c, a3c).
