@@ -2,7 +2,7 @@
 
 Python module that calculates the expected semi amplitudes of the first three harmonics of the ellipsoidal effect.
 
-Use the following steps:
+In order to use this module, complete the following steps:
 
 Download from GitHub "Aell_Harmonics" and save it in a local folder.
 
