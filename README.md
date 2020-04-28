@@ -18,7 +18,7 @@ Open Python:
 >> import Harmonics as H
 
 4. Use the "Aell_PH" function to derive the semi-amplitudes of the first three harmonics:
->> H.Aell_PH(teff,logg,f,i,q,band)  
+>> H.Aell_PH(teff,logg,Z,f,i,q,band)  
   
   
 Function description:
@@ -27,6 +27,7 @@ Aell_PH derives the ellipsoidal-semi-amplitudes of the first three harmonics.
 Inputs:  
 teff - effective temperature of the primary star  
 logg - surface gravity of the primary star  
+Z - metallicity  [FeH] of the primary star
 f - Roche-lobe filling factor of the primary  
 i - orbital inclination  
 q - binary mass ratio  
