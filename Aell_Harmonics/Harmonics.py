@@ -6,15 +6,15 @@ import os
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # These functions return the linear limb and gravity coefficients of a primary star 
-# with logg and teff, observed in a specific band.
-def claret2019(Tab,logg,teff,band,Type):
+# with logg, teff and Z, observed in a specific band.
+def claret2019(Tab,logg,teff,Z,band,Type):
     
     """
     Inputs:
         Tab - LD/GD table that was pre loaded with:
     'logg','Teff','Z','xi','u','Filt','Met','Mod' columns (LD table)
     'logg','logTeff','Z','xi','y','Filt','Mod' columns (GD table)     
-        logg,teff,band - parameters for which the value is interpolated (A sub table is taken for Z=0) 
+        logg,teff,Z,band - parameters for which the value is interpolated
         Type - Limb/Gravity Darkening Coefficient ('LD'/'GD')
     
     Output:
@@ -22,7 +22,8 @@ def claret2019(Tab,logg,teff,band,Type):
     """
     
     teff = min(max(teff,3500),40000)
-    logg = min(max(logg,0),5)
+    logg = min(max(logg,1),5)
+    Z = min(max(Z,-3),3)
     if len(band) == 1:
         band = band + ' '
     
@@ -35,10 +36,10 @@ def claret2019(Tab,logg,teff,band,Type):
         teffString = 'logTeff'
         teffVal = np.log10(teff)
     
-    claret = Tab[(Tab[:]['Z']==0.) & (Tab[:]['Filt']==band.encode('UTF-8'))]
-    points = np.column_stack((claret[:][teffString],claret[:]['logg']))       
+    claret = Tab[(Tab[:]['Filt']==band.encode('UTF-8'))]
+    points = np.column_stack((claret[:][teffString],claret[:]['logg'],claret[:]['Z']))       
     vals = claret[:][coeffString]
-    coeff= np.asscalar( griddata(points,vals,(teffVal,logg),method = 'linear') )
+    coeff= np.asscalar( griddata(points,vals,(teffVal,logg,Z),method = 'linear') )
 
     return coeff
 
@@ -138,12 +139,13 @@ def E(q):
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-def Aell_PH(teff,logg,f,i,q,band):      
+def Aell_PH(teff,logg,Z,f,i,q,band):      
 
     """
     Inputs:
         teff - effective temperature of the primary
         logg - surface gravity of the primary
+        Z - metallicity of the primary
         f - Roche-lobe filling factor of the primary
         i - orbital inclination
         q - binary mass ratio
@@ -166,8 +168,8 @@ def Aell_PH(teff,logg,f,i,q,band):
                                    'formats':('f4','f4','f4','f4','f4','S2','S1')}, delimiter = ';',skiprows=1)
     
     # Deriving limb and gravity darkening coefficients:
-    U1 = claret2019(LD_Claret,logg,teff,band,'LD')
-    TAU1 = claret2019(GD_Claret,logg,teff,band,'GD')
+    U1 = claret2019(LD_Claret,logg,teff,Z,band,'LD')
+    TAU1 = claret2019(GD_Claret,logg,teff,Z,band,'GD')
          
     # Deriving the semi amplitudes of the first three harmonics:
     coeffA = Aell_Analytic(teff,logg,U1,TAU1,q,i,f,band,Home_path)
