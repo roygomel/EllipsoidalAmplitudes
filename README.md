@@ -1,6 +1,6 @@
 # EllipsoidalAmplitudes
 
-Python module that calculates the expected semi amplitudes of the first three harmonics, based on the PHOEBE simulated light curves.
+Python module that calculates the expected semi amplitudes of the first three harmonics of the ellipsoidal effect.
 
 Use the following steps:
 
